@@ -1,0 +1,66 @@
+/**
+ * Created by cahlab on 9/28/17.
+ */
+public class Job {
+
+
+    // Private variables
+    private int reference_number;
+    private int operation;
+    private int argument;
+
+    /**
+     * Default constructor
+     */
+    private Job(){
+
+    }
+
+    /**
+     *
+     * @param reference_number A reference number (a unique identifier for that operation)
+     * @param operation An operation (either 1 for “allocate” or 2 for “de-allocate”)
+     * @param argument An argument (a size in bytes for an allocate operation;
+     *                 a reference number for a de-allocate operation)
+     */
+    public Job(int reference_number, int operation, int argument){
+            this.reference_number = reference_number;
+            this.operation = operation;
+            this.argument = argument;
+    }
+
+
+    public int getReference_number(){
+        return this.reference_number;
+    }
+
+    public int getOperation(){
+        return this.operation;
+    }
+
+    public int getArgument(){
+        return this.argument;
+    }
+
+
+    public boolean isAllocating(){
+        return getOperation() == 1;
+    }
+
+    public boolean isDeallocating(){
+        return getOperation() == 2;
+    }
+
+
+    public Job hardCopy(){
+        Job copy = new Job();
+
+        copy.reference_number = this.reference_number;
+        copy.operation = this.operation;
+        copy.argument = this.argument;
+
+        return copy;
+
+    }
+
+}
