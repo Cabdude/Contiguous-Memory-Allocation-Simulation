@@ -29,6 +29,9 @@ public class MemoryManagement {
 
 
     private final int TOTAL_BYTES = 1024;
+    private int used_bytes = 0;
+
+
     private ArrayList<Job> mem_jobs;
 
     public MemoryManagement(String filePath) {
@@ -43,8 +46,10 @@ public class MemoryManagement {
                 FirstFit();
                 break;
             case BestFit:
+                BestFit();
                 break;
             case WorstFit:
+                WorstFit();
                 break;
             default:
                 break;
@@ -53,7 +58,84 @@ public class MemoryManagement {
     }
 
     private void FirstFit() {
+        MemLL blockList = new MemLL();
+        blockList.insertAtStart(new Block());
 
+        for(Job job : mem_jobs){
+
+            if(job.isAllocating()){
+                    boolean placed = blockList.firstFitInsert(new Block(job));
+                    if(!placed){
+                        blockList.printBlocks();
+
+                        System.out.println("Request " + job.getReference_number() + " failed at allocating "
+                        + job.getArgument() + " bytes." );
+                        System.out.println("External Fragmentation is "
+                                + blockList.externalFragmentation() + " bytes.");
+                        return;
+                    }
+            }else if(job.isDeallocating()){
+                    blockList.deallocateBlock(job.getArgument());
+            }
+
+        }
+
+        blockList.printBlocks();
+    }
+
+    private void BestFit(){
+        MemLL blockList = new MemLL();
+        blockList.insertAtStart(new Block());
+
+        for(Job job : mem_jobs){
+
+            if(job.isAllocating()){
+                boolean placed = blockList.specialFitInsert(new Block(job),Allocate.BestFit);
+                if(!placed){
+
+                    blockList.printBlocks();
+
+                    System.out.println("Request " + job.getReference_number() + " failed at allocating "
+                            + job.getArgument() + " bytes." );
+                    System.out.println("External Fragmentation is "
+                            + blockList.externalFragmentation() + " bytes.");
+                    return;
+                }
+            }else if(job.isDeallocating()){
+                blockList.deallocateBlock(job.getArgument());
+            }
+
+        }
+
+        blockList.printBlocks();
+    }
+
+
+    private void WorstFit(){
+        MemLL blockList = new MemLL();
+        blockList.insertAtStart(new Block());
+
+        for(Job job : mem_jobs){
+
+            if(job.isAllocating()){
+                boolean placed = blockList.specialFitInsert(new Block(job),Allocate.WorstFit);
+                if(!placed){
+
+                    blockList.printBlocks();
+
+                    System.out.println("Request " + job.getReference_number() + " failed at allocating "
+                            + job.getArgument() + " bytes." );
+                    System.out.println("External Fragmentation is "
+                            + blockList.externalFragmentation() + " bytes.");
+                    return;
+                }
+            }else if(job.isDeallocating()){
+                blockList.deallocateBlock(job.getArgument());
+            }
+
+        }
+
+        blockList.printBlocks();
     }
 
 }
