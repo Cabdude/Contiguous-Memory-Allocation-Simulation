@@ -4,12 +4,17 @@ import java.io.FileReader;
 import java.util.ArrayList;
 
 /**
- * Created by cahlab on 9/28/17.
+ * @author Caleb Bishop
+ * @version 1
  */
 public class MemIO {
 
 
-
+    /**
+     *
+     * @param filePath file path of text file
+     * @return an ArrayList<Job> containing the content of the file loaded into a Job
+     */
     public static ArrayList<Job> ReadMemFile(String filePath){
         int reference_number, operation, argument;
         ArrayList<Job> jobs;

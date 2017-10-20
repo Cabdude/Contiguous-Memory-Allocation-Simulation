@@ -1,5 +1,6 @@
 /**
- * Created by cahlab on 9/28/17.
+ * @author Caleb Bishop
+ * @version 1
  */
 public class Job {
 
@@ -30,37 +31,47 @@ public class Job {
     }
 
 
+    /**
+     *
+     * @return
+     */
     public int getReference_number(){
         return this.reference_number;
     }
 
+    /**
+     *
+     * @return
+     */
     public int getOperation(){
         return this.operation;
     }
 
+    /**
+     *
+     * @return
+     */
     public int getArgument(){
         return this.argument;
     }
 
 
+    /**
+     *
+     * @return
+     */
     public boolean isAllocating(){
         return getOperation() == 1;
     }
 
+
+    /**
+     *
+     * @return
+     */
     public boolean isDeallocating(){
         return getOperation() == 2;
     }
 
-
-    public Job hardCopy(){
-        Job copy = new Job();
-
-        copy.reference_number = this.reference_number;
-        copy.operation = this.operation;
-        copy.argument = this.argument;
-
-        return copy;
-
-    }
 
 }
