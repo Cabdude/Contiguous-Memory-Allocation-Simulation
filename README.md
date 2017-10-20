@@ -49,9 +49,12 @@ Success
 Example
 
 1 1 30
-2 1 40
-3 1 50
-4 2 1
+<br/><br/>
+2 1 40\n
+<br/><br/>
+3 1 50\n
+<br/><br/>
+4 2 1\n
 
 
 The first number is the reference id of job.
