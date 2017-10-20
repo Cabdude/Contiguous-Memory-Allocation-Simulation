@@ -43,4 +43,21 @@ Success
 Success
 
 
+
+# Format of File Argument
+
+Example
+
+1 1 30
+2 1 40
+3 1 50
+4 2 1
+
+
+The first number is the reference id of job.
+The second number is a request to allocate or deallocate. (1 - Allocate, 2 - Deallocate)
+The third number if allocate will try and allocate those amount of bytes into a memory stack of 1024 bytes.
+  If it is deallocate, the third argument will be the reference id to deallocate from memory.
+
+
 If for any reason it cannot read the file or the jobs into the simulator, the simulator will not run. A reason for this would be having a newline at the end of the file. It does not error check for this.
